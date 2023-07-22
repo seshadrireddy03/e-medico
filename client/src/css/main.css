@@ -1,0 +1,101 @@
+/* main.css */
+
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color:paleturquoise;
+}
+
+/* Top navigation bar */
+.nav{
+  color: rgb(41, 41, 87);
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  height:70px;
+  background-color: paleturquoise;
+}
+.head{
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+}
+ul{
+  display: flex;
+  
+}
+.nav ul li{
+  list-style: none;
+  text-decoration: none;
+  display: block;
+  padding:3px 20px;
+  border-radius: 20px;
+  margin: 0 23px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.nav ul li:hover{
+  font-size: 1rem;
+  color:black;
+  background-color: rgb(41, 41, 87);
+  color:  paleturquoise;
+}
+.btn1{
+  margin-right: 20px;
+    color:white;
+    background-color:orangered;
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-shadow: rgb(45, 45, 72);
+    text-decoration: none;
+}
+
+/* Container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+/* Button styles */
+.button_text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.button_text a {
+  display: block;
+  text-decoration: none;
+}
+
+.button_label {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Image styles */
+.patient-image,
+.doctor-image {
+  width: 200px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive styles */
+@media screen and (min-width: 768px) {
+  /* Adjust container alignment for larger screens */
+  .container {
+    flex-direction: row;
+  }
+
+  .button_text {
+    margin: 0 20px;
+  }
+}
