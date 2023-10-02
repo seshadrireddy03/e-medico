@@ -1,12 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const Patient = require('../Models/PatientModel')
+const Donor = require('../Models/DonorModel')
 const JWT_SECRET = "Harsha$@"
 var jwt = require('jsonwebtoken')
-const Doctor = require('../Models/DoctorModel')
-router.post('/createpatient',async(req,res)=>{
+const Volunter = require('../Models/VolunterModel')
+const Recipient = require('../Models/RecipientModel')
+router.post('/createdonor',async(req,res)=>{
     const {username,email,password,dob} = req.body
-    const patient = await Patient.create({
+    const donor = await Donor.create({
         username:username,
         email:email,
         password:password,
@@ -14,79 +15,123 @@ router.post('/createpatient',async(req,res)=>{
     })
     const data = {
         user:{
-            id:patient.id,
+            id:donor.id,
         }
       }
       const authtoken = jwt.sign(data, JWT_SECRET)
-    return res.status(200).json({success:true,patient,authtoken})
+    return res.status(200).json({success:true,donor,authtoken})
 })
 
-router.post('/createdoctor',async(req,res)=>{
-    const {username,email,password,dob} = req.body
-    const doctor = await Doctor.create({
+router.post('/createvolunter',async(req,res)=>{
+    const {username,email,password,phone,dob} = req.body
+    const volunter = await Volunter.create({
         username:username,
         email:email,
         password:password,
+        phone:phone,
+        dob:dob
     })
     const data = {
         user:{
-            id:doctor.id,
+            id:volunter.id,
         }
       }
       const authtoken = jwt.sign(data, JWT_SECRET)
-    return res.status(200).json({success:true,doctor,authtoken})
+    return res.status(200).json({success:true,volunter,authtoken})
 })
 
-router.post('/login',async(req,res)=>{
-    const {email,password} = req.body
-    const patient = await Patient.findOne({email:email})
-    if(!patient){
-        return res.status(200).json({success:false,message:"login with correct credentials"})
-    }
-    if(password!==patient.password){return res.status(200).json({success:false,message:"login with correct credentials"})}
+router.post('/createrecipient',async(req,res)=>{
+    const {username,email,password,phone,dob} = req.body
+    const recipient = await Recipient.create({
+        username:username,
+        email:email,
+        password:password,
+        phone:phone,
+        dob:dob
+    })
     const data = {
         user:{
-            id:patient.id,
+            id:recipient.id,
         }
       }
       const authtoken = jwt.sign(data, JWT_SECRET)
-    return res.status(200).json({success:true,patient,authtoken})
+    return res.status(200).json({success:true,recipient,authtoken})
 })
 
-router.post('/doctorlogin',async(req,res)=>{
+router.post('/donorlogin',async(req,res)=>{
     const {email,password} = req.body
-    const doctor = await Doctor.findOne({email:email})
-    if(!doctor){
+    const donor = await Donor.findOne({email:email})
+    if(!donor){
         return res.status(200).json({success:false,message:"login with correct credentials"})
     }
-    if(password!==doctor.password){return res.status(200).json({success:false,message:"login with correct credentials"})}
+    if(password!==donor.password){return res.status(200).json({success:false,message:"login with correct credentials"})}
     const data = {
         user:{
-            id:doctor.id,
+            id:donor.id,
         }
       }
       const authtoken = jwt.sign(data, JWT_SECRET)
-    return res.status(200).json({success:true,doctor,authtoken})
+    return res.status(200).json({success:true,donor,authtoken})
 })
 
+router.post('/volunterlogin',async(req,res)=>{
+    const {email,password} = req.body
+    const volunter = await Volunter.findOne({email:email})
+    if(!volunter){
+        return res.status(200).json({success:false,message:"login with correct credentials"})
+    }
+    if(password!==volunter.password){return res.status(200).json({success:false,message:"login with correct credentials"})}
+    const data = {
+        user:{
+            id:volunter.id,
+        }
+      }
+      const authtoken = jwt.sign(data, JWT_SECRET)
+    return res.status(200).json({success:true,volunter,authtoken})
+})
 
-router.post('/getpatient',async(req,res)=>{
+router.post('/recipientlogin',async(req,res)=>{
+    const {email,password} = req.body
+    const volunter = await Recipient.findOne({email:email})
+    if(!volunter){
+        return res.status(200).json({success:false,message:"login with correct credentials"})
+    }
+    if(password!==volunter.password){return res.status(200).json({success:false,message:"login with correct credentials"})}
+    const data = {
+        user:{
+            id:volunter.id,
+        }
+      }
+      const authtoken = jwt.sign(data, JWT_SECRET)
+    return res.status(200).json({success:true,volunter,authtoken})
+})
+
+router.post('/getdonor',async(req,res)=>{
     const token = req.header('auth-token')
     if(!token){
         return res.status(401).json({error:"please use a vaild token"})
     }
-    const patient = jwt.verify(token,JWT_SECRET)
-    const user = await Patient.findById(patient.user.id)
+    const donor = jwt.verify(token,JWT_SECRET)
+    const user = await Donor.findById(donor.user.id)
     return res.status(200).json(user)
 })
 
-router.post('/getdoctor',async(req,res)=>{
+router.post('/getvolunter',async(req,res)=>{
     const token = req.header('auth-token')
     if(!token){
         return res.status(401).json({error:"please use a vaild token"})
     }
-    const doctor = jwt.verify(token,JWT_SECRET)
-    const user = await Doctor.findById(doctor.user.id)
+    const volunter = jwt.verify(token,JWT_SECRET)
+    const user = await Volunter.findById(volunter.user.id)
+    return res.status(200).json(user)
+})
+router.post('/getrecipient',async(req,res)=>{
+    const token = req.header('auth-token')
+    if(!token){
+        return res.status(401).json({error:"please use a vaild token"})
+    }
+    const volunter = jwt.verify(token,JWT_SECRET)
+    const user = await Recipient.findById(volunter.user.id)
     return res.status(200).json(user)
 })
 

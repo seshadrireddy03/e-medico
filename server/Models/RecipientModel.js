@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const patientSchema = new mongoose.Schema({
+const recipientSchema = new mongoose.Schema({
     username:{
         type:String,
         required:true
@@ -13,11 +13,16 @@ const patientSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    phone:{
+        type:String,
+        required:true,
+    },
     dob:{
-        type:Date
+        type:Date,
+        required:true,
     }
 })
 
-const patient = mongoose.model('Patient',patientSchema)
+const recipient = mongoose.model('Recipient',recipientSchema)
 
-module.exports = patient
+module.exports = recipient

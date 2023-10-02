@@ -1,22 +1,30 @@
 import './App.css';
 import { Route,Routes,BrowserRouter } from 'react-router-dom'
 import LoginPage from './Components/LoginPage';
-import PatientLogin from './Components/PatientLogin';
-import PatientRegister from './Components/PatientRegister';
-import Patient from './Components/Patient';
-import DoctorLogin from './Components/DoctorLogin';
-import DoctorPage from './Components/DoctorPage';
+import Donor from './Components/Dlogin';
+import DonorRegister from './Components/DonorRegister';
+import DonorPage from './Components/DonorPage';
+import VolunterLogin from './Components/VolunterLogin';
+import VolunterPage from './Components/VolunterPage';
+import VolunterRegister from './Components/VolunterRegister';
+import RecipientLogin from './Components/RecipientLogin';
+import RecipientPage from './Components/RecipientPage';
+import RecipientRegister from './Components/RecipientRegister';
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route Component={LoginPage} path='/'/>
-          <Route Component={PatientLogin} path='/patientlogin'/>
-          <Route Component={PatientRegister} path='/patientregister'/>
-          <Route Component={Patient} path='/patient'/>
-          <Route Component={DoctorLogin} path='/doctorlogin'/>
-          <Route Component={DoctorPage} path='/doctor'/>
+          <Route Component={Donor} path='/Dlogin'/>
+          <Route Component={DonorRegister} path='/DonorRegister'/>
+          <Route Component={DonorPage} path='/DonorPage'/>
+          <Route Component={VolunterRegister} path='/VolunterRegister'/>
+          <Route Component={VolunterLogin} path='/VolunterLogin'/>
+          <Route Component={VolunterPage} path='/volunter'/>
+          <Route Component={RecipientRegister} path='/RecipientRegister'/>
+          <Route Component={RecipientLogin} path='/RecipientLogin'/>
+          <Route Component={RecipientPage} path='/Recipient'/>
         </Routes>
       </BrowserRouter>
     </>

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const doctorSchema = new mongoose.Schema({
+const donorSchema = new mongoose.Schema({
     username:{
         type:String,
         required:true
@@ -12,9 +12,13 @@ const doctorSchema = new mongoose.Schema({
     password:{
         type:String,
         required:true,
+    },
+    dob:{
+        type:Date,
+        required:true,
     }
 })
 
-const doctor = mongoose.model('Doctor',doctorSchema)
+const donor= mongoose.model('donor',donorSchema)
 
-module.exports = doctor
+module.exports = donor
