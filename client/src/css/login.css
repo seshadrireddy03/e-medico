@@ -1,0 +1,40 @@
+
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #121212; 
+}
+
+.container-p {
+  text-align: center;
+  background-color: #121212;
+  padding: 40px;
+  box-shadow: 0px 0px 10px 0px #eee;
+}
+
+.container-p img {
+  width: 150px;
+  height: 150px;
+}
+
+.form-group {
+  margin: 20px 0;
+}
+
+.form-group input {
+  padding: 10px;
+  width: 200px;
+}
+
+.form-group button {
+  padding: 10px 20px;
+  background-color:antiquewhite;
+  color: #121212;
+  border: none;
+  font-weight: 600;
+  font-size: small;
+  cursor: pointer;
+}
+

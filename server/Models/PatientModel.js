@@ -1,28 +1,30 @@
 const mongoose = require('mongoose')
-const recipientSchema = new mongoose.Schema({
+const patientSchema = new mongoose.Schema({
     username:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     email:{
         type:String,
         required:true,
         unique:true
     },
-    password:{
+    phone:{
         type:String,
         required:true,
     },
-    phone:{
+    password:{
         type:String,
         required:true,
     },
     dob:{
         type:Date,
         required:true,
-    }
+    },
+    
 })
 
-const recipient = mongoose.model('Recipient',recipientSchema)
+const patient= mongoose.model('patient',patientSchema)
 
-module.exports = recipient
+module.exports = patient

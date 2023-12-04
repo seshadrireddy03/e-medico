@@ -3,48 +3,26 @@ const formSchema = new mongoose.Schema({
     name:{
         type:String,
         required:true,
-        ref:'donor'
     },
-    location:{
+    dname:{
         type:String,
         required:true,
-        ref:'Volunter'
     },
     description:{
         type:String,
         required:true
     },
-    dphoneno:{
+    phoneno:{
         type:String,
         required:true,
     },
-    rphoneno:{
-        type:String,
-        required:true,
+    comments:{
+        type:String, 
+        required: false, 
     },
-    vphoneno:{
-        type:String,
-        required:true,
-    },
-    raccepted:{
-        type:Boolean, 
-        required: true, 
-    },
-    accepted:{
-        type:Boolean, 
-        required: true, 
-    },
-    vname:{
-        type:String,
-        required:true
-    },
-    rname:{
-        type:String,
-        required:true
-    }
 
 })
 
-const Form = mongoose.model('Form',formSchema)
+const Form = mongoose.model('MForm',formSchema)
 
 module.exports = Form

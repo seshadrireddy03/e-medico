@@ -1,0 +1,116 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+  }
+  
+  .top{
+    margin-right:90%;
+  }
+
+  .btn-main{
+    color:white;
+    background-color:orangered;
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-shadow: rgb(45, 45, 72);
+    text-decoration: none;
+  }
+  
+  .formdiv{
+    padding: 10px;
+    box-shadow: 0 0 1px 1px wheat;
+  }
+
+  .center-form {
+    width: 300px; /* Adjust the width as needed */
+  }
+  
+  .form-group {
+    margin-bottom: 1px;
+  }
+
+  .form-group label{
+    font-weight: bold;
+  }
+  
+  /* Additional styles for input fields */
+
+  textarea,
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 1px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type="text"],input[type="password"]{
+    width: 100%;
+    padding: 8px;
+    margin-top: 1px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type="submit"] {
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .record-div {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* A/* Adjust as needed */
+  }
+  
+  .card {
+    margin: 0 10px;
+    flex: 0 0 calc(30% - 20px); /* Display three cards in a row */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background-color: #f9f9f9e0;
+    color: #333;
+  
+  }
+  
+  /* Card styling for different sections */
+  .card p {
+    margin: 5px 0;
+  }
+  
+  .card h4 {
+    margin: 10px 0;
+    color: #333;
+  }
+  
+  /* Responsive styles for smaller screens */
+  @media (max-width: 1200px) {
+    .card {
+      flex: 0 0 calc(45% - 20px); /* Display two cards in a row for smaller screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .card {
+      flex: 0 0 calc(100% - 20px); /* Display one card per row for even smaller screens */
+    }
+  }

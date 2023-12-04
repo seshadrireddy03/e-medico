@@ -1,26 +1,30 @@
 const express = require('express')
 const router = express.Router();
 const FormModel = require('../Models/FormModel')
+const Doctor=require('../Models/DoctorModel')
 
+router.get('/doctors', async (req, res) => {
+  try {
+    const doctors = await Doctor.find({},'username');
+    res.json({ success: true, data: doctors });
+    console.log(doctors)
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Failed to fetch doctors' });
+  }
+});
 
 router.post('/upload', async (req, res) => {
   try {
     console.log(req.body + "Body...");
-      const { name, location, description, phoneno } = req.body;
-      console.log(location + "dufhjdshgfjdsgfjgdsfjhdgsj"); 
+      const { name, phoneno, description, dname } = req.body;
+      console.log(dname + "dufhjdshgfjdsgfjgdsfjhdgsj"); 
 
       // Create a new form entry
       const newForm = new FormModel({
         name: name,
-        location:location,
+        phoneno:phoneno,
         description: description,
-        dphoneno:phoneno, 
-        rphoneno:" ",
-        vphoneno:" ",
-        accepted: false,
-        raccepted: false,
-        vname:" ",
-        rname: " ",
+        dname:dname      
     });
     console.log(newForm+ " hulalalalalalal");
 
@@ -36,10 +40,11 @@ router.post('/upload', async (req, res) => {
   }
 })
 
-router.get('/getdonor/:location', async (req, res) => {
+router.get('/getRecords/:username', async(req, res) => {
   try {
-    const { location } = req.params;
-    const donors = await FormModel.find({ location, accepted: !!false,raccepted:!false }); // Filter donors based on location
+    console.log("fuck");
+    const { username } = req.params;
+    const donors=await FormModel.find({name:username}); // Filter donors based on location
     console.log(donors);
     if (!donors || donors.length === 0) {
       return res.status(200).json({ message: "No donations available for this location" });
@@ -50,10 +55,12 @@ router.get('/getdonor/:location', async (req, res) => {
   }
 });
 
-router.get('/getdonor00/:vname', async (req, res) => {
+router.get('/getprecords/:username', async(req, res) => {
   try {
-    const { vname } = req.params;
-    const donors = await FormModel.find({name:vname}); // Filter donors based on location
+    console.log("fuck");
+    const { username } = req.params;
+    console.log(username);
+    const donors=await FormModel.find({dname:username}); // Filter donors based on location
     console.log(donors);
     if (!donors || donors.length === 0) {
       return res.status(200).json({ message: "No donations available for this location" });
@@ -64,108 +71,7 @@ router.get('/getdonor00/:vname', async (req, res) => {
   }
 });
 
-router.get('/getdonor11/:vname', async (req, res) => {
-  try {
-    const { vname } = req.params;
-    const donors = await FormModel.find({ vname, accepted: !false}); // Filter donors based on location
-    console.log(donors);
-    if (!donors || donors.length === 0) {
-      return res.status(200).json({ message: "No donations available for this location" });
-    }
-    return res.status(200).json({ success: true, data: donors });
-  } catch (error) {
-    return res.status(500).json({ success: false, error, message: "Some error occurred" });
-  }
-});
 
-router.get('/getdonor1/:location', async (req, res) => {
-  try {
-    const { location } = req.params;
-    const donors = await FormModel.find({ location, raccepted: !!false }); // Filter donors based on location
-    console.log(donors);
-    if (!donors || donors.length === 0) {
-      return res.status(200).json({ message: "No donations available for this location" });
-    }
-    return res.status(200).json({ success: true, data: donors });
-  } catch (error) {
-    return res.status(500).json({ success: false, error, message: "Some error occurred" });
-  }
-});
 
-router.get('/getdonor12/:rname', async (req, res) => {
-  try {
-    const { rname } = req.params;
-    const donors = await FormModel.find({ rname, raccepted: !false}); // Filter donors based on location
-    console.log(donors);
-    if (!donors || donors.length === 0) {
-      return res.status(200).json({ message: "No donations available for this location" });
-    }
-    return res.status(200).json({ success: true, data: donors });
-  } catch (error) {
-    return res.status(500).json({ success: false, error, message: "Some error occurred" });
-  }
-});
-
-router.post('/uploadcomment',async(req,res)=>{
-  const {donorid,volunter,vphone, accepted} = req.body;
-  console.log(req.body);
-  const updateAcceptedStatus = async (id, newAcceptedValue) => {
-  try {
-    const filter = { _id: id }; // Specify the filter based on _id
-    const update = { accepted: newAcceptedValue,vname:volunter,vphoneno: vphone }; // Specify the field you want to update and its new value
-
-    // Use updateOne method to update the document
-    const result = await FormModel.updateOne(filter, update);
-
-    if (result.nModified === 1) {
-      console.log(`Document with _id ${id} updated successfully.`);
-    } else {
-      console.log(`Document with _id ${id} not found.`);
-    }
-  } catch (error) {
-    console.error(`Error updating document: ${error.message}`);
-  }
-};
-updateAcceptedStatus(donorid, true);
-
-  return res.status(200).json({message:"comment sent successfully"})
-})
-
-router.post('/uploadcomment1',async(req,res)=>{
-  const {donorid, donorName, donorLocation,description,recipient,rphone, accepted,raccepted} = req.body;
-  console.log(req.body);
-  const updateAcceptedStatus = async (id, newAcceptedValue) => {
-  try {
-    const filter = { _id: id }; // Specify the filter based on _id
-    const update = { raccepted: newAcceptedValue ,rname:recipient,rphoneno:rphone}; // Specify the field you want to update and its new value
-
-    // Use updateOne method to update the document
-    const result = await FormModel.updateOne(filter, update);
-
-    if (result.nModified === 1) {
-      console.log(`Document with _id ${id} updated successfully.`);
-    } else {
-      console.log(`Document with _id ${id} not found.`);
-    }
-  } catch (error) {
-    console.error(`Error updating document: ${error.message}`);
-  }
-};
-
-updateAcceptedStatus(donorid, true);
-  return res.status(200).json({message:"comment sent successfully"})
-})
-
-router.delete('/deleteform/:name',async(req,res)=>{
-  try {
-    const {name} = req.params
-    const comment = await Image.deleteOne({name:name})
-    return res.status(200).json({comment})
-  } catch (error) {
-    console.log(error);
-  }
-
-})
-
-module.exports = router
+module.exports = router;
 
